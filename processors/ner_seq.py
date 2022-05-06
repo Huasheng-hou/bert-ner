@@ -157,6 +157,83 @@ def convert_examples_to_features(examples,label_list,max_seq_length,tokenizer,
     return features
 
 
+class ContractProcessor(DataProcessor):
+    """Processor for the chinese ner data set."""
+
+    def get_train_examples(self, data_dir):
+        """See base class."""
+        return self._create_examples(self._read_contract(os.path.join(data_dir, "train")), "train")
+
+    def get_dev_examples(self, data_dir):
+        """See base class."""
+        return self._create_examples(self._read_contract(os.path.join(data_dir, "dev")), "dev")
+
+    def get_test_examples(self, data_dir):
+        """See base class."""
+        return self._create_examples(self._read_contract(os.path.join(data_dir, "test")), "test")
+
+    def get_labels(self):
+        """See base class."""
+        return ["X",'B-product','B-cub price','B-wholesale price','B-fodder price','B-medicine price',
+                'B-feeding period','B-subsidy','B-guarantee deposit', 'B-technology', 'B-default responsibility',
+                'B-number of products','I-product','I-cub price','I-wholesale price','I-fodder price',
+                'I-medicine price','I-feeding period','I-subsidy','I-guarantee deposit', 'I-technology',
+                'I-default responsibility','I-number of products',
+                'O','S-product','S-cub price','S-wholesale price','S-fodder price',
+                'S-medicine price','S-feeding period','S-subsidy','S-guarantee deposit', 'S-technology',
+                'S-default responsibility','S-number of products',"[START]", "[END]"]
+
+    def _read_contract(self, input_dir):
+        li = os.listdir(input_dir)
+        lines = []
+        for d in li:
+            with open(os.path.join(input_dir, d), 'r') as f:
+                words = []
+                labels = []
+                for line in f:
+                    if line.startswith("-DOCSTART-") or line == "" or line == "\n":
+                        if words:
+                            lines.append({"words": words, "labels": labels})
+                            words = []
+                            labels = []
+                    else:
+                        splits = line.split(" ")
+                        words.append(splits[0])
+                        if len(splits) > 1:
+                            splits[-1] = splits[-1].replace('\n', '')
+                            if splits[-1] == '':
+                                splits.pop(-1)
+                            # print(splits[1:])
+                            # print(' '.join(splits[1:]))
+                            labels.append(' '.join(splits[1:]))
+                        else:
+                            # Examples could have no label for mode = "test"
+                            labels.append("O")
+                if words:
+                    lines.append({"words": words, "labels": labels})
+        return lines
+
+    def _create_examples(self, lines, set_type):
+        """Creates examples for the training and dev sets."""
+        examples = []
+        for (i, line) in enumerate(lines):
+            if i == 0:
+                continue
+            guid = "%s-%s" % (set_type, i)
+            text_a= line['words']
+            # BIOS
+            labels = []
+            for x in line['labels']:
+                if 'M-' in x:
+                    labels.append(x.replace('M-','I-'))
+                elif 'E-' in x:
+                    labels.append(x.replace('E-', 'I-'))
+                else:
+                    labels.append(x)
+            examples.append(InputExample(guid=guid, text_a=text_a, labels=labels))
+        return examples
+
+
 class CnerProcessor(DataProcessor):
     """Processor for the chinese ner data set."""
 
@@ -236,5 +313,6 @@ class CluenerProcessor(DataProcessor):
 
 ner_processors = {
     "cner": CnerProcessor,
-    'cluener':CluenerProcessor
+    'cluener':CluenerProcessor,
+    'contract':ContractProcessor,
 }
