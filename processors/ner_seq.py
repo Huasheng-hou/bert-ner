@@ -175,13 +175,14 @@ class ContractProcessor(DataProcessor):
     def get_labels(self):
         """See base class."""
         return ["X",'B-product','B-cub price','B-wholesale price','B-fodder price','B-medicine price',
-                'B-feeding period','B-subsidy','B-guarantee deposit', 'B-technology', 'B-default responsibility',
+                'B-feeding/planting period','B-subsidy','B-guarantee deposit', 'B-technology',
+                'B-default responsibility', 'B-quantity',
                 'B-number of products','I-product','I-cub price','I-wholesale price','I-fodder price',
-                'I-medicine price','I-feeding period','I-subsidy','I-guarantee deposit', 'I-technology',
-                'I-default responsibility','I-number of products',
+                'I-medicine price','I-feeding/planting period','I-subsidy','I-guarantee deposit', 'I-technology',
+                'I-default responsibility','I-number of products', 'I-quantity',
                 'O','S-product','S-cub price','S-wholesale price','S-fodder price',
-                'S-medicine price','S-feeding period','S-subsidy','S-guarantee deposit', 'S-technology',
-                'S-default responsibility','S-number of products',"[START]", "[END]"]
+                'S-medicine price','S-feeding/planting period','S-subsidy','S-guarantee deposit', 'S-technology',
+                'S-default responsibility','S-number of products','S-quantity', "[START]", "[END]"]
 
     def _read_contract(self, input_dir):
         li = os.listdir(input_dir)
@@ -192,10 +193,7 @@ class ContractProcessor(DataProcessor):
                 labels = []
                 for line in f:
                     if line.startswith("-DOCSTART-") or line == "" or line == "\n":
-                        if words:
-                            lines.append({"words": words, "labels": labels})
-                            words = []
-                            labels = []
+                        continue
                     else:
                         splits = line.split(" ")
                         words.append(splits[0])
@@ -203,6 +201,10 @@ class ContractProcessor(DataProcessor):
                             splits[-1] = splits[-1].replace('\n', '')
                             if splits[-1] == '':
                                 splits.pop(-1)
+                            if splits[1] == '':
+                                splits.pop(1)
+                            for idx in range(1, len(splits)):
+                                splits[idx] = splits[idx].replace(' ', '')
                             # print(splits[1:])
                             # print(' '.join(splits[1:]))
                             labels.append(' '.join(splits[1:]))
