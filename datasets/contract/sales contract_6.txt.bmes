@@ -1,0 +1,177 @@
+约 O
+定 O
+： O
+“ O
+甲 B-retailer
+方 E-retailer
+提 O
+供 O
+黑 B-product
+小 M-product
+豆 E-product
+种 O
+植 O
+。 O
+种 B-seed
+子 M-seed
+款 E-seed
+以 O
+赊 O
+欠 O
+方 O
+式 O
+给 O
+乙 O
+方 O
+种 O
+植 O
+户 O
+。 O
+甲 B-retailer
+方 E-retailer
+秋 O
+后 O
+回 O
+收 O
+时 O
+， O
+以 O
+每 O
+斤 O
+种 O
+子 O
+收 O
+2 O
+斤 O
+黑 B-product
+小 M-product
+豆 E-product
+作 O
+为 O
+种 B-seed
+子 M-seed
+款 E-seed
+。 O
+种 O
+子 O
+成 O
+熟 O
+期 O
+在 O
+1 B-feeding/planting period
+0 M-feeding/planting period
+0 M-feeding/planting period
+天 E-feeding/planting period
+左 O
+右 O
+， O
+亩 B-quantity
+产 E-quantity
+在 O
+3 O
+0 O
+0 O
+斤 O
+至 O
+5 O
+0 O
+0 O
+斤 O
+之 O
+间 O
+。 O
+被 O
+告 O
+收 O
+购 O
+价 O
+格 O
+每 B-wholesale price 
+市 M-wholesale price 
+斤 E-wholesale price 
+2 B-wholesale price 
+. M-wholesale price 
+4 M-wholesale price 
+0 M-wholesale price 
+元 M-wholesale price 
+／ M-wholesale price 
+斤 E-wholesale price 
+， O
+保 B-wholesale price 
+底 M-wholesale price 
+价 M-wholesale price 
+回 M-wholesale price 
+收 E-wholesale price 
+。 O
+甲 B-retailer
+方 E-retailer
+回 O
+收 O
+日 O
+期 O
+定 O
+在 O
+2 O
+0 O
+1 O
+4 O
+年 O
+1 O
+0 O
+月 O
+1 O
+日 O
+起 O
+， O
+到 O
+2 O
+0 O
+1 O
+4 O
+年 O
+1 O
+0 O
+月 O
+2 O
+0 O
+日 O
+止 O
+， O
+如 O
+果 O
+在 O
+回 O
+收 O
+日 O
+内 O
+不 O
+收 O
+或 O
+推 O
+迟 O
+回 O
+收 O
+， O
+甲 B-retailer
+方 E-retailer
+以 O
+每 O
+1 O
+斤 O
+种 O
+子 O
+赔 O
+偿 O
+5 O
+斤 O
+黑 B-product
+小 M-product
+豆 E-product
+款 O
+给 O
+乙 O
+方 O
+等 O
+。 O
+” O
+
