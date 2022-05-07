@@ -182,7 +182,12 @@ class ContractProcessor(DataProcessor):
                 'I-default responsibility','I-number of products', 'I-quantity',
                 'O','S-product','S-cub price','S-wholesale price','S-fodder price',
                 'S-medicine price','S-feeding/planting period','S-subsidy','S-guarantee deposit', 'S-technology',
-                'S-default responsibility','S-number of products','S-quantity', "[START]", "[END]"]
+                'S-default responsibility','S-number of products','S-quantity', 'B-retailer',
+                'I-retailer', 'S-retailer', 'B-farmer', 'I-farmer', 'S-farmer',
+                'B-seed', 'I-seed', 'S-seed', 'B-fertilizer', 'I-fertilizer', 'S-fertilizer',
+                'B-safety', 'I-safety', 'S-safety', 'B-yield', 'I-yield', 'S-yield',
+                'B-quality', 'I-quality', 'S-quality', 'B-quality standard', 'I-quality standard',
+                'S-quality standard', "[START]", "[END]"]
 
     def _read_contract(self, input_dir):
         li = os.listdir(input_dir)
