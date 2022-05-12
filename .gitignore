@@ -10,6 +10,7 @@ __pycache__/
 .Python
 .idea
 build/
+prev_trained_model
 develop-eggs/
 dist/
 downloads/
